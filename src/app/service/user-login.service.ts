@@ -11,7 +11,7 @@ export class UserLoginService {
   serviceURL: string;
 
   constructor(private http: HttpClient) {
-    this.serviceURL = 'http://localhost:3000/api';
+    this.serviceURL = 'http://localhost:3000/register';
   }
   createUser(email: string, password: any) {
     console.log(email, 'email');
