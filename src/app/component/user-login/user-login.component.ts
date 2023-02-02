@@ -16,7 +16,7 @@ export class UserLoginComponent {
   constructor(private fb: FormBuilder,public userLoginService:UserLoginService) {}
   onSubmit() {
     console.log('hii');
-    console.log(this.signInForm.value);
+    console.log(this.signInForm.value,'form value');
     const userDetails=this.signInForm.value
     this.userLoginService.createUser('ajnaskp67@gmail.com','ajnas@123')
     
