@@ -36,14 +36,17 @@ export class UserLoginComponent implements OnInit {
     this.loginService
       .loginUser({ email: `${email}`, password: `${password}` })
       .subscribe((res) => {
+        console.log(res,'ffffffffffffffffffff');
+
         if (res.status) {
+          localStorage.setItem('token',res.token)
           Swal.fire('Hi', `${res.message}`, 'success');
 
           this.router.navigate(['/']);
         } else {
           Swal.fire('Hi', `${res.message}`, 'error');
         }
-        console.log(res);
+        
       });
 
     // this.loginService.loginUser(this.exform.value);
