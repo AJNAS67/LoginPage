@@ -29,13 +29,14 @@ export class RegisterComponent {
     let email = this.registerFrom.value?.email;
 
     let password = this.registerFrom.value?.password;
+    const data = {
+      username: `${username}`,
+      email: `${email}`,
+      password: `${password}`,
+    }
 
     this.registerService
-      .registerUser({
-        username: `${username}`,
-        email: `${email}`,
-        password: `${password}`,
-      })
+      .registerUser(data)
       .subscribe((res) => {
         console.log(res, 'responce');
         console.log(res?.message);

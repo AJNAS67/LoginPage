@@ -1,25 +1,20 @@
-import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormControl,
-  FormBuilder,
-  Validators,
-} from '@angular/forms';
-import { UserLoginService } from 'src/app/service/user-login.service';
-import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AdminService } from 'src/app/service/admin.service';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
+
 
 @Component({
-  selector: 'app-user-login',
-  templateUrl: './user-login.component.html',
-  styleUrls: ['./user-login.component.scss'],
+  selector: 'app-admin-login',
+  templateUrl: './admin-login.component.html',
+  styleUrls: ['./admin-login.component.scss'],
 })
-export class UserLoginComponent implements OnInit {
-  constructor(private loginService: UserLoginService, private router: Router) {}
+export class AdminLoginComponent implements OnInit {
   exform!: FormGroup;
+  constructor(private adminService: AdminService,private router:Router) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.exform = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [
@@ -28,26 +23,23 @@ export class UserLoginComponent implements OnInit {
       ]),
     });
   }
-
   clicksub() {
     console.log(this.exform.value, 'reee');
     let email = this.exform.value.email;
     let password = this.exform.value.password;
-    this.loginService
-      .loginUser({ email: `${email}`, password: `${password}` })
+    this.adminService
+      .adminLogin({ email: `${email}`, password: `${password}` })
       .subscribe((res) => {
-        
-        console.log(res,'ffffffffffffffffffff');
+        console.log(res, 'ffffffffffffffffffff');
 
         if (res.status) {
-          localStorage.setItem('token',res.token)
+          localStorage.setItem('adminToken', res.token);
           Swal.fire('Hi', `${res.message}`, 'success');
 
-          this.router.navigate(['/']);
+          this.router.navigate(['/admin']);
         } else {
           Swal.fire('Hi', `${res.message}`, 'error');
         }
-        
       });
 
     // this.loginService.loginUser(this.exform.value);
