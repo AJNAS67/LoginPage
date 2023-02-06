@@ -19,9 +19,12 @@ export class HeaderComponent implements OnInit {
           console.log(err, 'errrr');
         }
       );
-    console.log(localStorage.getItem('token'),'ajjajaaj');
+    console.log(localStorage.getItem('token'), 'ajjajaaj');
   }
-  logout(){
-    localStorage.removeItem('token')
+  logout() {
+    localStorage.removeItem('token');
+  }
+  AdminLogout() {
+    localStorage.removeItem('adminToken');
   }
 }

@@ -19,4 +19,8 @@ export class AdminService {
   getAllUsers(): Observable<any> {
     return this.http.get(`http://localhost:3000/api/all-users`);
   }
+  loggedIn(){
+    // it return true or false
+    return !!localStorage.getItem('adminToken')
+  }
 }
